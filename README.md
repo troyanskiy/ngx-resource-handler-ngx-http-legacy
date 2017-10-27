@@ -9,6 +9,7 @@ It's implementation of `RestHandler` which uses Angular `Http` from `@angular/ht
 
 In you app module
 ```typescript
+import { HttpModule} from '@angular/http';
 
 // AoT requires an exported function for factories
 export function myHandlerFactory(http: Http) {
@@ -19,7 +20,7 @@ export function myHandlerFactory(http: Http) {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
+    HttpModule,
 
     // Default RestHandler uses class `RestHandlerHttp`
     RestModule.forRoot()
