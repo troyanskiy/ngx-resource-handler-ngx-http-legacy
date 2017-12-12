@@ -20,13 +20,13 @@ module.exports = {
     output: {
         path: helpers.root('dist/bundles'),
         publicPath: '/',
-        filename: 'rest-ngx-http.umd.js',
-        library: 'rest-ngx-http',
+        filename: 'handler-ngx-http-legacy.umd.js',
+        library: 'ngx-resource-handler-ngx-http-legacy',
         libraryTarget: 'umd'
     },
 
     // require those dependencies but don't bundle them
-    externals: [/^\@angular\//, /^rxjs\//, /^rest\-core/],
+    externals: [/^\@angular\//, /^rxjs\//, /^\@ngx\-resource/],
 
     module: {
         rules: [{

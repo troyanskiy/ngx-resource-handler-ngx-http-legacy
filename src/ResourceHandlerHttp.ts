@@ -1,12 +1,15 @@
-import { IRestRequest, IRestResponse, RestRequestMethod, RestResponseBodyType } from 'rest-core';
 import { Injectable } from '@angular/core';
 import { Http, Request, RequestMethod, Response, ResponseContentType } from '@angular/http';
 import { RequestArgs } from '@angular/http/src/interfaces';
-import { RestHandlerAbstract } from './RestHandlerAbstract';
 import { Observable } from 'rxjs/Observable';
+import {
+  IResourceRequest, IResourceResponse, ResourceRequestMethod,
+  ResourceResponseBodyType
+} from '@ngx-resource/core';
+import { ResourceHandlerAbstract } from './ResourceHandlerAbstract';
 
 @Injectable()
-export class RestHandlerHttp extends RestHandlerAbstract {
+export class ResourceHandlerHttp extends ResourceHandlerAbstract {
 
   constructor(private http: Http) {
     super();
@@ -16,7 +19,7 @@ export class RestHandlerHttp extends RestHandlerAbstract {
     return this.http.request(request);
   }
 
-  protected prepareRequest(req: IRestRequest): Request {
+  protected prepareRequest(req: IResourceRequest): Request {
 
     const options: RequestArgs = {
       url: req.url,
@@ -26,46 +29,46 @@ export class RestHandlerHttp extends RestHandlerAbstract {
 
     switch (req.method) {
 
-      case RestRequestMethod.Get:
+      case ResourceRequestMethod.Get:
         options.method = RequestMethod.Get;
         break;
 
-      case RestRequestMethod.Post:
+      case ResourceRequestMethod.Post:
         options.method = RequestMethod.Post;
         break;
 
-      case RestRequestMethod.Put:
+      case ResourceRequestMethod.Put:
         options.method = RequestMethod.Put;
         break;
 
-      case RestRequestMethod.Delete:
+      case ResourceRequestMethod.Delete:
         options.method = RequestMethod.Delete;
         break;
 
-      case RestRequestMethod.Head:
+      case ResourceRequestMethod.Head:
         options.method = RequestMethod.Head;
         break;
 
-      case RestRequestMethod.Options:
+      case ResourceRequestMethod.Options:
         options.method = RequestMethod.Options;
         break;
 
-      case RestRequestMethod.Patch:
+      case ResourceRequestMethod.Patch:
         options.method = RequestMethod.Patch;
 
     }
 
     switch (req.responseBodyType) {
 
-      case RestResponseBodyType.Json:
+      case ResourceResponseBodyType.Json:
         options.responseType = ResponseContentType.Json;
         break;
 
-      case RestResponseBodyType.ArrayBuffer:
+      case ResourceResponseBodyType.ArrayBuffer:
         options.responseType = ResponseContentType.ArrayBuffer;
         break;
 
-      case RestResponseBodyType.Blob:
+      case ResourceResponseBodyType.Blob:
         options.responseType = ResponseContentType.Blob;
         break;
 
@@ -86,20 +89,20 @@ export class RestHandlerHttp extends RestHandlerAbstract {
 
   }
 
-  protected handleResponse(req: IRestRequest, response: Response): IRestResponse {
+  protected handleResponse(req: IResourceRequest, response: Response): IResourceResponse {
 
     let body: any;
     switch (req.responseBodyType) {
 
-      case RestResponseBodyType.Json:
+      case ResourceResponseBodyType.Json:
         body = response.json();
         break;
 
-      case RestResponseBodyType.ArrayBuffer:
+      case ResourceResponseBodyType.ArrayBuffer:
         body = response.arrayBuffer();
         break;
 
-      case RestResponseBodyType.Blob:
+      case ResourceResponseBodyType.Blob:
         body = response.blob();
         break;
 
